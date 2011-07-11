@@ -1,0 +1,52 @@
+<% maxpos = 1 %>
+<% content_tag :ol, { :class => "reorder reorder_head" } do %>
+    <% content_tag :li, { :class => "issue" } do %>
+	  <%= content_tag :span, "№", :class => 'reorder_issue_num' %>
+	  <%= content_tag :span, "Раздел", :class => 'reorder_issue_project' %>
+          <%= (content_tag :span, "П.", :class => 'reorder_issue_short') %>
+          <%= (content_tag :span, "О.", :class => 'reorder_issue_short') if list_type != 'project' %>
+	  <%= (content_tag :span, "Тип", :class => 'reorder_issue_type') if list_type == 'developer' %>
+          <%= content_tag :span, "Статус", :class => 'reorder_issue_status' %>
+	  <%= content_tag :span, "Тема", :class => 'reorder_issue_subject' %>
+          <%= (content_tag :span, "Цель", :class => 'reorder_issue_cf3') if list_type == 'manager' or list_type == 'project' %>
+          <%= content_tag :span, "Готовность", :class => 'reorder_issue_field' %>
+          <%= (content_tag :span, "Оцененное время", :class => 'reorder_issue_field') if list_type == 'developer' %>
+    <% end %>
+<% end %>
+<% content_tag :ol, { :id => "issues", :class => "reorder reorder_body"} do %>
+  <% issues.each do |issue| %>
+    <% maxpos = issue.position_for_user if issue.position_for_user and issue.position_for_user > maxpos %>
+    <% content_tag_for :li, issue, (sort_action and { :class => 'draggable' }) do %>
+	  <%= content_tag :span, (link_to issue.id.to_s, :controller => 'issues', :action => 'show', :id => issue), :class => 'reorder_issue_num' %>
+          <%= content_tag :span, issue.project.name, :class => 'reorder_issue_project' %>
+          <%= (content_tag :span, (issue.priority.name or ''), :class => 'reorder_issue_short') %>
+          <%= (content_tag :span, (issue.position_for_user or ''), :class => 'reorder_issue_short') if list_type != 'project' %>
+          <%= (content_tag :span, issue.tracker.name, :class => 'reorder_issue_type') if list_type == 'developer' %>
+	  <%= content_tag :span, issue.status.name, :class => 'reorder_issue_status' %>
+	  <%= content_tag :span, issue.subject, :class => 'reorder_issue_subject' %>
+          <%= (content_tag :span, issue.custom_field_values.first.value, :class => 'reorder_issue_cf3') if (list_type == 'manager' or list_type == 'project') and (issue.custom_field_values.first) %>
+          <%= content_tag :span, (issue.done_ratio.to_s + '%'), :class => 'reorder_issue_field' %>
+          <%= (content_tag :span, (issue.estimated_hours or 0).to_s, :class => 'reorder_issue_field') if list_type == 'developer' %>
+    <% end %>
+  <% end %>
+<% end %>
+<% if sort_action %>
+<script type="text/javascript">
+//<![CDATA[
+Sortable.create("issues", {constraint:'vertical'});
+var update_issues = function(updateall){
+  new Ajax.Request(
+    updateall?'<%= url_for :action => sort_action %>':'<%= url_for :action => sort_action, :maxpos => maxpos %>', 
+    {
+        asynchronous:true, 
+        evalScripts:true, 
+        parameters:Sortable.serialize("issues"),
+        onSuccess: reload_list
+    }
+  )
+}
+//]]>
+</script>
+<button onclick="update_issues(false)">Применить</button>&nbsp;&nbsp;
+<button onclick="update_issues(true)">Применить ко всем</button>
+<% end %>

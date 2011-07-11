@@ -1,0 +1,18 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'compel', :plugin => 'compel_plugin' %>
+<% end %>
+<h1>Очередь задач</h1>
+<% if @issues.empty? %>
+<p>Раздел не содержит задач доступных для упорядочивания</p>
+<% else %>
+<script type="text/javascript">
+//<![CDATA[
+var reload_list = function(){
+  location.reload()
+}
+//]]>
+</script>
+<p>Для изменения положения задачи в списке, перетащите её мышкой на требуемую позицию.<br />Для сохранения установленного порядка задач нажмите кнопку &laquo;Применить&raquo;</p>
+<%= render :partial => 'list', :locals => { :issues => @issues, :sort_action => 'order_project_issues', :list_type => 'project' } %>
+<% end %>
+

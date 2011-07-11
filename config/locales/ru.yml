@@ -1,0 +1,126 @@
+# Compel plugin
+ru:
+# core
+  button_update: Редактировать
+  button_submit: Применить
+  label_issue_plural_menu: Задачи раздела
+  permission_view_issues: Просмотр задач
+  permission_manage_project_activities: Определение доступных категорий учета времени
+  permission_see_project_timesheets: Просмотр отчетов по затраченому времени
+  label_logged_as: "Пользователь:"
+  label_my_account: "Персональные настройки"
+  label_query_plural: "Задачи по запросу"
+  label_assigned_to_me_issues: Назначеные мне задачи  
+  label_reported_issues: "Созданные мною задачи"
+  label_issue_view_all: "Активные задачи"  
+  label_my_queries: "Мои запросы"
+  text_issue_added: "Создана новая задача {{id}}. Автор {{author}}."
+# subtasks
+  subtasks_field_parent: Подпроект
+  subtasks_field_parent_issue: Подзадача для
+  subtasks_field_parent_title: Родительская задача
+  subtasks_label_view: "Настройки"
+  subtasks_label_children: родительская задача для
+  subtasks_label_parents: поздадача для
+  subtasks_label_view_option_parents_do_not_show: Не показывать
+  subtasks_label_view_option_parents_show_always: Всегда показывать
+  subtasks_label_view_option_parents_show_and_group: Группировать
+  subtasks_label_view_option_show_parents: Иерархия задач
+  subtasks_label_subissues: Подзадачи
+  subtasks_label_settings_subissues_list_columns: Отображаемые колонки для списка подзадач
+  subtasks_label_settings_delete_children: Удалять подзадачи при удалении родительской задачи
+  subtasks_button_add_subissue: Добавить подзадачу
+# Проект -> Раздел
+  error_issue_not_found_in_project: Задача не была найдена или не прикреплена к этому разделу
+  field_is_for_all: Для всех разделов
+  field_parent: Родительский раздел
+  field_subproject: Подраздел
+  label_and_its_subprojects: "{{value}} и все подразделы"
+  label_jump_to_a_project: Перейти к разделу...
+  label_my_projects: Мои разделы
+  label_project: Раздел
+  label_project_all: Все разделы
+  label_project_latest: Новые разделы
+  label_project_new: Новый раздел
+  label_project_plural2: раздела
+  label_project_plural5: разделов
+  label_public_projects: Общие разделы
+  label_subproject_plural: Подразделы
+  label_user_mail_option_all: "О всех событиях во всех моих разделах"
+  label_user_mail_option_selected: "О всех событиях только в выбранном разделе..."
+  label_x_projects:
+    zero: нет разделов
+    one: 1 раздел
+    other: "{{count}} разделов"
+  permission_edit_project: Управление разделами
+  permission_select_project_modules: Выбор модулей раздела
+  setting_cross_project_issue_relations: Разрешить пересечение задач по разделам
+  setting_default_projects_public: Новые разделы являются общедоступными
+  setting_display_subprojects_issues: Отображение подразделов по умолчанию
+  setting_sequential_project_identifiers: Генерировать последовательные идентификаторы разделов
+  text_assign_time_entries_to_project: Учитывать затраченое время по задачам раздела
+  text_project_destroy_confirmation: Вы настаиваете на удалении данного раздела и всей относящейся к нему информации?
+  text_select_project_modules: 'Выберите модули, которые будут использованы в разделе:'
+  text_subprojects_destroy_warning: "Подразделы: {{value}} также будут удалены."
+  text_user_mail_option: "Для невыбранных разделов, Вы будете получать уведомления только о том что просматриваете или в чем участвуете (например, вопросы, автором которых Вы являетесь или которые Вам назначены)."
+  permission_add_project: Создание раздела
+  setting_new_project_user_role_id: Роль, назначаемая пользователю, создавшему раздел
+  error_no_tracker_in_project: С этим разделом не ассоциирован ни один тип задачи. Проверьте настройки раздела.
+  setting_default_projects_modules: Включенные по умолчанию модули для новых разделов
+  field_project: Раздел
+  label_project_plural: Разделы
+# Трекер -> Тип задачи
+  field_tracker: Тип задачи
+  label_tracker: Тип задачи
+  label_tracker_new: Новый тип задачи
+  label_tracker_plural: Типы задач
+  text_no_configuration_data: "Роли, типы задач, статусы задач и оперативный план не были сконфигурированы.\nНастоятельно рекомендуется загрузить конфигурацию по-умолчанию. Вы сможете её изменить потом."
+  text_tracker_no_workflow: Для этого типа задач последовательность действий не определена
+  text_workflow_edit: Выберите роль и тип задачи для редактирования последовательности состояний
+# Reorder  
+  project_module_compel: Специальные настройки
+  permission_compel_pos_orpo: Диспетчерезация задач ОРПО
+  permission_compel_pos_orit: Диспетчерезация задач ОРИТ
+  permission_compel_pos_view: Просмотр очереди задач
+  label_compel_pos_orpo: Очередь задач ОРПО
+  label_compel_pos_orit: Очередь задач ОРИТ
+  compel_pos_orpo: Разработчик ОРПО
+  compel_pos_orit: Разработчик ОРИТ
+  label_compel_pos: Управление очередью задач
+  compel_pos: Сотрудник
+  user: Пользователь
+#   project_module_reorder: Порядок выполнения
+#   label_reorder_show: Мои задачи
+#   label_reorder_developer: Очередь задач разработчика
+#   label_reorder_ideveloper: Очередь задач ОРИТ
+#   label_reorder_mk: Очередь задач МК
+#   label_reorder_ce: Очередь задач ПА КЭ
+#   label_reorder_manager: Очередь задач менеджера
+#   label_reorder_project: Приоритеты
+#   label_reorder_top: Новые задачи
+#   reoder_manager: Менеджер
+#   reoder_developer: Разработчик
+#   reoder_ideveloper: Разработчик ОРИТ
+#   reoder_mk: Разработчик
+#   reoder_ce: Разработчик
+#   permission_reorder_show: Просмотр своей очереди задач
+#   permission_reorder_developer: Диспетчерезация задач разработчиков
+#   permission_reorder_ideveloper: Диспетчерезация задач ОРИТ
+#   permission_reorder_ce: Диспетчерезация задач ПА КЭ
+#   permission_reorder_mk: Диспетчерезация задач МК
+#   permission_reorder_manager: Диспетчерезация задач менеджеров
+#   permission_reorder_project: Управление приоритетами задач в разделе
+#   reorder_goto_issue: "(перейти)"
+#   field_position_for_project: Порядок
+  field_position_for_user: Очередь
+# sms
+  label_user_mail_sms_notification: SMS-оповещения
+# absolute timestamps (bad)
+  label_added_time_by: "Добавлено {{author}} {{age}}"
+  label_updated_time: "Обновлено {{value}}"
+  label_updated_time_by: "Обновлено {{author}} {{age}}"
+# windows csv
+  general_csv_encoding: "WINDOWS-1251"
+  general_csv_decimal_separator: ","
+  general_csv_separator: ";"
+

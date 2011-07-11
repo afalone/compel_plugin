@@ -1,0 +1,33 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'compel', :plugin => 'compel_plugin' %>
+<% end %>
+
+<%= content_tag :h2, l(:label_reorder_manager) %>
+
+<% form_tag ({}, { :name => 'select_form' }) do %>
+<%= label "manager", "id", l(:reoder_manager) %>
+<%= select "manager", "id", @users.collect { |u| [ u.name, u.id ] }, { :include_blank => true }, { :onchange => "this.form.submit()", :name => 'id' } %>
+<% end %>
+
+<% if @manager %>
+
+<% if @issues.empty? %>
+<p>У пользователя <%= content_tag :strong, @manager.name(:lastname_firstname) %> в настоящий момент нет назначенных задач.</p>
+<% else %>
+<script type="text/javascript">
+//<![CDATA[
+var reload_list = function(){
+  document.forms['select_form'].submit()
+}
+//]]>
+</script>
+<p>Для изменения положения задачи в списке, перетащите её мышкой на требуемую позицию.<br />Для сохранения установленной очереди задач нажмите кнопку &laquo;Применить&raquo;</p>
+<%= render :partial => 'list', :locals => { :issues => @issues, :sort_action => 'order_user_issues', :list_type => 'manager' } %>
+<% end %>
+
+<% else %>
+
+<p>Выберите менеджера</p>
+
+<% end %>
+

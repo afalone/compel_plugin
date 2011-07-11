@@ -1,0 +1,9 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'compel', :plugin => 'compel_plugin' %>
+<% end %>
+<%= content_tag :h1, l(:label_compel_pos_view) %>
+<% if @issues.empty? %>
+<p>В данный момент вам не назначено задач.</p>
+<% else %>
+<%= render :partial => 'list', :locals => { :issues => @issues, :sort_action => nil } %>
+<% end %>

@@ -1,0 +1,32 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'compel', :plugin => 'compel_plugin' %>
+<% end %>
+
+<%= content_tag :h2, l(:label_compel_pos) %>
+
+<% form_tag ({}, { :name => 'select_form' }) do %>
+<%= label "developer", "id", l(:compel_pos) %>
+<%= select "developer", "id", @users.collect { |u| [ u.name, u.id ] }, { :include_blank => true }, { :onchange => "this.form.submit()", :name => 'id' } %>
+<% end %>
+
+<% if @developer %>
+
+<% if @issues.empty? %>
+<p>У пользователя <%= content_tag :strong, @developer.name(:lastname_firstname) %> в настоящий момент нет назначенных задач.</p>
+<% else %>
+<script type="text/javascript">
+//<![CDATA[
+var reload_list = function(){
+  document.forms['select_form'].submit()
+}
+//]]>
+</script>
+<p>Для изменения положения задачи в списке, перетащите её мышкой на требуемую позицию.<br />Для сохранения установленной очереди задач нажмите кнопку &laquo;Применить&raquo;</p>
+<%= render :partial => 'list', :locals => { :issues => @issues, :sort_action => 'order_user_issues', :list_type => 'developer' } %>
+<% end %>
+
+<% else %>
+
+<p>Выберите разработчика</p>
+
+<% end %>

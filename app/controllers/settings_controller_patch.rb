@@ -1,0 +1,3 @@
+class SettingsController < ApplicationController
+ include SettingsControllerExtension
+end

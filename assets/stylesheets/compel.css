@@ -1,0 +1,54 @@
+.reorder {
+    padding-left: 0px;
+    list-style-type: none !important;
+}
+
+.reorder_head {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    list-style-type: none;
+}
+
+.reorder_body {
+    margin-top: 0px;
+    padding-top: 0px;    
+}
+
+.reorder .issue {
+    font-size: 100%;
+    padding: 0.3em 1em;
+    margin-bottom: 2px;
+    /* margin-left: 30px; */
+}
+
+.reorder .issue span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.reorder_head .issue {
+    background-color: #ffe2c6;
+}
+
+.reorder_body .issue {
+    background-color: #fff2d6;    
+}
+
+.reorder .draggable {
+    cursor: pointer;
+}
+
+.reorder_issue_num     { overflow: hidden; width: 60px;  }
+.reorder_issue_type    { overflow: hidden; width: 100px; }
+.reorder_issue_subject { overflow: hidden; width: 400px; }
+.reorder_issue_project { overflow: hidden; width: 110px; }
+.reorder_issue_status  { overflow: hidden; width: 120px; }
+.reorder_issue_user    { overflow: hidden; width: 180px; }
+.reorder_issue_cf3     { overflow: hidden; width: 180px; }
+.reorder_issue_field   { overflow: hidden; width: 80px;  }
+.reorder_issue_short   { overflow: hidden; width: 30px;  }
+
+#issue_custom_field_values_3
+{
+    
+}

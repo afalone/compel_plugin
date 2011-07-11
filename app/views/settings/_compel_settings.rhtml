@@ -1,0 +1,13 @@
+Порядок следования отчетов
+<%= @settings.inspect %>
+<table>
+ <tr>
+  <th>Имя</th>
+ </tr>
+<% Query.all(:conditions => {:is_public => true}).each do |query| %>
+ <tr class="<%= cycle('odd', 'even') -%>">
+  <td><%= query.name %></td>
+  <td><%= text_field_tag "queries[#{query.id}][position]", query.position.to_s %></td>
+ </tr>
+<% end %>
+</table>
