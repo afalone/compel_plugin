@@ -21,6 +21,7 @@ def initialize(runtime_args, runtime_options = {})
     #p record
     record do |m|
      m.template("initializer.rb", "config/initializers/compel_initializer.rb")
+     #m.migration_template("migration_.rb", "db/migrate", :migration_file_name => "create_#{name.underscore.pluralize.camelize}")
       #m.template('controller.rb', "app/controllers/#{name.pluralize}_controller.rb")
       #m.template('model.rb', "app/models/#{name}.rb")
       #m.migration_template("migration.rb", "db/migrate", :migration_file_name => "create_#{name.underscore.pluralize.camelize}")

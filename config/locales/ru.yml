@@ -79,9 +79,11 @@ ru:
   text_workflow_edit: Выберите роль и тип задачи для редактирования последовательности состояний
 # Reorder  
   project_module_compel: Специальные настройки
-  permission_compel_pos_orpo: Диспетчерезация задач ОРПО
-  permission_compel_pos_orit: Диспетчерезация задач ОРИТ
+  permission_compel_pos_orpo: Диспетчеризация задач ОРПО
+  permission_compel_pos_orit: Диспетчеризация задач ОРИТ
   permission_compel_pos_view: Просмотр очереди задач
+  permission_compel_pos_source: Управление источником ошибки
+  permission_edit_versions: Редактирование версий задачи
   label_compel_pos_orpo: Очередь задач ОРПО
   label_compel_pos_orit: Очередь задач ОРИТ
   compel_pos_orpo: Разработчик ОРПО
@@ -124,3 +126,7 @@ ru:
   general_csv_decimal_separator: ","
   general_csv_separator: ";"
 
+  activerecord:
+    errors:
+      messages:
+        denied: изменение запрещено

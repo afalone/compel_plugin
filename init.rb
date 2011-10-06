@@ -15,6 +15,9 @@ Redmine::Plugin.register :compel_plugin do
     permission :compel_pos_orpo, { :compel => [:orpo] }, :require => :member
     permission :compel_pos_orit, { :compel => [:orit] }, :require => :member
     permission :compel_pos_view, { :compel => [:view] }, :require => :member
+    permission :compel_pos_source, { :compel => [:view] }, :require => :member
+    #permission :edit_versions, {:issue => [:edit]}, :require => :member
+    permission :edit_versions, { }
   end
 
   # Мои задачи
@@ -47,3 +50,4 @@ end
 #end
 #ActiveSupport::Dependencies.load_paths << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/extra"
 $LOAD_PATH << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/extra"
+#$LOAD_PATH << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/app"
