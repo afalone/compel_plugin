@@ -14,6 +14,20 @@ module IssueExtension
  end
 
  module ClassMethods
+  def get_ordered_for_project(project_id)
+   find(
+    :all,
+    :conditions => { :status_id => 1, :project_id => project_id},
+    :order => "position_for_project IS NULL, position_for_project, #{Issue.table_name}.id DESC")
+  end
+
+  def get_ordered_for_user(user_id)
+   find(:all,
+    :include => :status,
+    :conditions => ["#{IssueStatus.table_name}.is_closed = ? AND assigned_to_id = ?", false, user_id],
+    :order => "position_for_user IS NULL, position_for_user, #{Issue.table_name}.id DESC")
+  end
+
 
  end
 
@@ -34,20 +48,6 @@ module IssueExtension
    if new_record? and self.status_id == 1
     self.assigned_to_id = nil
    end
-  end
-
-  def self.get_ordered_for_project(project_id)
-   find(
-    :all,
-    :conditions => { :status_id => 1, :project_id => project_id},
-    :order => "position_for_project IS NULL, position_for_project, #{Issue.table_name}.id DESC")
-  end
-
-  def self.get_ordered_for_user(user_id)
-   find(:all,
-    :include => :status,
-    :conditions => ["#{IssueStatus.table_name}.is_closed = ? AND assigned_to_id = ?", false, user_id],
-    :order => "position_for_user IS NULL, position_for_user, #{Issue.table_name}.id DESC")
   end
 
   def calc_position_for_user
