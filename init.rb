@@ -1,6 +1,7 @@
 require 'redmine'
 
 RAILS_DEFAULT_LOGGER.info 'Starting COMPEL plugin for RedMine'
+require_dependency 'compel_plugin/hooks'
 
 Redmine::Plugin.register :compel_plugin do
 

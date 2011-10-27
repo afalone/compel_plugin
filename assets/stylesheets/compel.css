@@ -52,3 +52,40 @@
 {
     
 }
+
+
+/* application */
+/* compel */
+
+.query_list {
+    margin-bottom: 0.5em;
+}
+
+td.cf_3 {
+    white-space: normal !important;
+    text-align: left;
+}
+
+td.project {
+    white-space: normal !important;
+    text-align: left;
+}
+
+a.back-button :hover {
+   text-decoration: none;
+}
+
+/* .priority, .priority * {
+    visibility: hidden;
+} */
+
+.bgr {
+  visibility: hidden;
+}
+
+ul.projects div.child a.project { font-family: Arial, sans-serif; font-weight: normal; font-size: 14px; }
+
+/* мин ширина subject 45em */
+tr.issue td.subject {
+ min-width: 20em;
+}

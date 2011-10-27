@@ -1,4 +1,4 @@
-module IssuesHelper
+module IssuesHelperExtension
   def self.included(base) # :nodoc:
     base.send(:include, InstanceMethods)
      base.class_eval do
