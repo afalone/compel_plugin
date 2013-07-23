@@ -4,12 +4,20 @@ module IssueExtension
   base.send(:include, IssueExtension::InstanceMethods)
   base.class_eval do
    after_save :reorder_positions
+   before_save :store_work_dates
    before_save :init_position
    before_validation :apply_issue_close_date
    validate :check_assigned_to_validity_in_status
    protected :check_assigned_to_validity_in_status
+   validate :validate_project_manager
    alias_method_chain :assignable_versions, :permission_edit
-   alias_method_chain :validate, :permission_edit
+   #alias_method_chain :validate, :permission_edit
+   alias_method_chain :validate_issue, :permission_edit
+   alias_method_chain :due_before, :task_date
+   safe_attributes 'due_task_date',
+    :if => lambda {|issue, user| issue.new_record? || user.allowed_to?(:edit_issues, issue.project) }
+   safe_attributes 'due_task_date',
+    :if => lambda {|issue, user| issue.new_statuses_allowed_to(user).any? }
   end
  end
 
@@ -32,6 +40,44 @@ module IssueExtension
  end
 
  module InstanceMethods
+  def validate_project_manager
+   if self.status_id_changed?
+    if self.status_id_was == 1 and self.status_id == 7
+     self.errors.add_to_base I18n.t(:need_project_manager) unless self.custom_values.detect{|v| v.custom_field.id == 22 && (!v.value.blank?)}
+    end
+   end
+   # проверить статусы New -> проектирование
+   # проверить наличие 
+  end
+
+  def due_before_with_task_date
+    due_task_date || (fixed_version ? fixed_version.effective_date : nil)
+  end
+
+  def store_work_dates
+   if self.status_id_changed? && self.due_task_date && !self.new_record?
+    en = self.time_entries.new :hours => 0, :activity_id => 36, :spent_on => Date.today, :due_task_fact_date => Date.today, :due_task_date => self.due_task_date, :due_task_status_id => self.status_id_was
+    en.user_id = (self.assigned_to_id_changed? ? self.assigned_to_id_was : self.assigned_to_id)
+    en.save
+    #TimeEntry.create(:project_id => self.project_id, :user_id => (self.assigned_to_id_changed? ? self.assigned_to_id_was : self.assigned_to_id), :issue_id => self.id, :due_task_date => self.due_task_date, :due_task_fact_date => Date.today, :due_task_status_id => self.status_id_was, :activity_id => 36, :hours => 0, :spent_on => Date.today)
+   end
+   if self.status_id_changed? && !self.new_record?
+    if self.status_id == 4
+     self.due_task_date = Date.today + 4 unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    elsif self.status_id == 10
+     self.due_task_date = Date.today + 1 unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    elsif self.status_id == 13
+     self.due_task_date = Date.today unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    elsif self.status_id == 23
+     self.due_task_date = Date.today + 7 unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    elsif self.status_id == 35
+     self.due_task_date = Date.today + 2 unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    else
+     self.due_task_date = nil unless (self.due_task_date_changed? && !self.due_task_date.blank?)
+    end
+   end
+  end
+
   def reorder_positions
    if self.assigned_to_id_changed? and self.assigned_to_id_was and self.position_for_user_was
     rebuild_position_for_user(assigned_to_id_was)
@@ -104,7 +150,7 @@ module IssueExtension
    @assignable_versions = vers
   end
 
-  def validate_with_permission_edit
+  def validate_issue_with_permission_edit
    unless User.current.allowed_to?(:edit_versions, nil, {:global => true})
     if self.fixed_version_id_changed?
      self.errors.add :fixed_version_id, :denied
@@ -159,7 +205,7 @@ module IssueExtension
     end
 
    else
-    self.validate_without_permission_edit
+    self.validate_issue_without_permission_edit
    end
    @now_in_validation = false
   end

@@ -3,13 +3,13 @@ module MailerExtension
   #base.extend(IssueExtension::ClassMethods)
   base.send(:include, MailerExtension::InstanceMethods)
   base.class_eval do
-   alias_method_chain :create_mail, :compel
-   alias_method_chain :render_multipart, :compel
+   alias_method_chain :mail, :compel
+   #alias_method_chain :render_multipart, :compel
   end
  end
 
  module InstanceMethods
-  def create_mail_with_compel
+  def mail_with_compel(headers = {})
    # compel
    if recipients
     recipients.reject do |user_email|
@@ -31,7 +31,7 @@ module MailerExtension
      user and user.pref[:sms_notification]
     end
    end
-   create_mail_without_compel
+   mail_without_compel(headers)
   end
 
   def render_multipart_with_compel(method_name, body)

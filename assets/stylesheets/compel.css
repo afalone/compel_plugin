@@ -89,3 +89,5 @@ ul.projects div.child a.project { font-family: Arial, sans-serif; font-weight: n
 tr.issue td.subject {
  min-width: 20em;
 }
+
+tr.issue td.tracker {white-space: normal;}

@@ -1,6 +1,6 @@
 require 'redmine'
 
-RAILS_DEFAULT_LOGGER.info 'Starting COMPEL plugin for RedMine'
+Rails.logger.info 'Starting COMPEL plugin for RedMine'
 require_dependency 'compel_plugin/hooks'
 
 Redmine::Plugin.register :compel_plugin do
@@ -14,7 +14,7 @@ Redmine::Plugin.register :compel_plugin do
 
   project_module :compel do
     permission :compel_pos_orpo, { :compel => [:orpo] }, :require => :member
-    permission :compel_pos_orit, { :compel => [:orit] }, :require => :member
+    #permission :compel_pos_orit, { :compel => [:orit] }, :require => :member
     permission :compel_pos_view, { :compel => [:view] }, :require => :member
     permission :compel_pos_source, { :compel => [:view] }, :require => :member
     #permission :edit_versions, {:issue => [:edit]}, :require => :member
@@ -35,7 +35,7 @@ Redmine::Plugin.register :compel_plugin do
   menu :top_menu, :compel_new, { :controller => :issues, :action => :index, :query_id => 1 },  :caption => 'Новые задачи'
 
   menu :application_menu, :compel_pos_orpo, { :controller => :reorder, :action => :developer  }, :caption => 'Очередь ОРПО', :if => Proc.new { User.current.allowed_to?(:compel_pos_orpo, nil, :global => true) }  
-  menu :application_menu, :compel_pos_orit, { :controller => :reorder, :action => :ideveloper }, :caption => 'Очередь ОРИТ', :if => Proc.new { User.current.allowed_to?(:compel_pos_orit, nil, :global => true) } 
+  #menu :application_menu, :compel_pos_orit, { :controller => :reorder, :action => :ideveloper }, :caption => 'Очередь ОРИТ', :if => Proc.new { User.current.allowed_to?(:compel_pos_orit, nil, :global => true) } 
 
 #  menu :project_menu, :reorder_project, { :controller => :reorder, :action => :project }, :caption => :label_reorder_project, :before => :new_issue, :if => Proc.new { |p| User.current.allowed_to?(:reorder_project, p) || User.current.admin? }
 
@@ -50,5 +50,5 @@ end
 # end
 #end
 #ActiveSupport::Dependencies.load_paths << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/extra"
-$LOAD_PATH << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/extra"
+$LOAD_PATH << "#{Rails.root}/plugins/compel_plugin/extra"
 #$LOAD_PATH << "#{RAILS_ROOT}/vendor/plugins/compel_plugin/app"

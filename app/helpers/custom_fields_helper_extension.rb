@@ -23,6 +23,14 @@ module CustomFieldsHelperExtension
   end
 
   def custom_field_tag_with_label_with_perm(n, v)
+   unless v.custom_field.editor_id.nil? || User.current.roles_for_project(@project).map(&:id).include?(v.custom_field.editor_id)
+    custom_field = v.custom_field
+    field_name = "#{n}[custom_field_values][#{custom_field.id}]"
+    field_id = "#{n}_custom_field_values_#{custom_field.id}"
+    val = show_value(v)
+    val = format_value(v.custom_field.default_value, v.custom_field.field_format) if val.blank? && v.custom_field.is_required?
+    return custom_field_label_tag(n, v) + val + hidden_field_tag(field_name, val, :id => field_id)
+   end
    return custom_field_tag_with_label_without_perm(n, v) if n != :issue || v.custom_field.name != "Источник ошибки"
    
    if User.current.allowed_to?(:compel_pos_source, nil, :global => true)

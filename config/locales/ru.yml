@@ -125,6 +125,13 @@ ru:
   general_csv_encoding: "WINDOWS-1251"
   general_csv_decimal_separator: ","
   general_csv_separator: ";"
+  field_due_date: Дата выполнения задачи
+  field_due_task_date: Дата выполнения этапа
+  plan_date: Дата план
+  fact_date: Дата факт
+  delta_date: "Разница П-Ф"
+  field_editor: Доступ к редактированию
+  need_project_manager: Необходим ответственный МП
 
   activerecord:
     errors:

@@ -3,7 +3,7 @@ class ReorderController < ApplicationController
   unloadable
 
   menu_item :compel_pos_orpo, :only => :developer
-  menu_item :compel_pos_orit, :only => :ideveloper
+  #menu_item :compel_pos_orit, :only => :ideveloper
 
   # TODO: to settings
   GROUP_DEVELOPERS = 12 # to perm

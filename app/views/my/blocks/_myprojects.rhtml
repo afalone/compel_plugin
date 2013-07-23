@@ -1,0 +1,4 @@
+<h3><%=l(:label_my_projects)%></h3>
+<% projects = Project.visible.find(:all, :order => 'lft').find_all { |p| User.current.member_of?(p) } %>
+<%= render_project_hierarchy(projects, false, 'projects2', true)  %>
+<%- #%>

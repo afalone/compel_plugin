@@ -3,6 +3,7 @@ module MyControllerExtension
 #  base.send(:include, InstanceMethods)
   base.const_set(:BLOCKS, (base.const_get(:BLOCKS).merge( 'myprojects' => :label_my_projects)).freeze)
   base.class_eval do
+   helper :projects
 #   alias_method_chain :plugin, :compel_queries
   end
  end

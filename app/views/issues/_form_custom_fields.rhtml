@@ -1,0 +1,8 @@
+<% content_for :custom_fields_values do %>
+<div class="splitcontentleft">
+<% @issue.custom_field_values.each do |value| %>
+  <p><%= custom_field_tag_with_label :issue, value %></p>
+<% end -%>
+</div>
+<div style="clear:both;"> </div>
+<% end %>

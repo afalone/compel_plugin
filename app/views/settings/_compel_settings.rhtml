@@ -11,3 +11,11 @@
  </tr>
 <% end %>
 </table>
+<div>
+ <fieldset><legend>Поля даты</legend>
+  <div>
+   Роль
+   <%= select_tag("settings[compel_dating_role]", options_from_collection_for_select(Role.all(:order => "position"), "id", "name", Setting.find_by_name("plugin_compel_plugin").try(:value).try(:[], "compel_dating_role").try(:map, &:to_i)), :multiple => true) %>
+  </div>
+ </fieldset>
+</div>
